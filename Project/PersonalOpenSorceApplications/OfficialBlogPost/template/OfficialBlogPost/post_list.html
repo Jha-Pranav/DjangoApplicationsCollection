@@ -1,0 +1,23 @@
+{% extends 'OfficialBlogPost/base.html' %}
+{% block title %} Post List
+{%endblock%}
+
+{% block body %}
+
+{% if post_list %}
+<div>
+    {% for post in post_list %}
+    <h3><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h3>
+
+    <div><p>Publish date : {{post.pub_date|date:"D M Y"}}</p></div>
+    
+    <a href="{% url 'post_detail' pk=post.pk %}">Comments : {{post.approve_comment.count}}</a>
+
+    {%endfor%}
+</div>
+{% else %}
+<h3><em>No Post Found</em></h3>
+{%endif%}
+
+
+{%endblock%}
