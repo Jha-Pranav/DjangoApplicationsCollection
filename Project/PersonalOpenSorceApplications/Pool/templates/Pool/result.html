@@ -1,0 +1,13 @@
+{% extends 'Pool/base.html' %}
+
+{% block title %}Pool Result{% endblock %}
+{% block body %}
+<h1>{{question.question_text}}</h1>
+{% for r in question.choice_set.all %}
+
+    <ul>
+        {{r.choice_text}} : <strong>{{r.votes}}</strong> vote{{ choice.votes|pluralize }}
+    </ul>
+
+{%endfor%}
+{% endblock %}

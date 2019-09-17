@@ -16,7 +16,7 @@ class Post(models.Model):
         self.save()
 
     def approve_comment(self):
-        return self.comments.filter(approved_comment = True)
+        return self.comments.filter(approve_date=True)
 
     def get_absolute_url(self):
         return reverse('post_detail')

@@ -21,9 +21,16 @@ from Pool.views import index
 
 urlpatterns = [
     path('', include('OfficialBlogPost.urls')),
+    path('pool/', include('Pool.urls')),
     path('admin/', admin.site.urls),
     path('account/login', views.LoginView.as_view(), name='login'),
     path('account/logout', views.LogoutView.as_view(),name='logout', kwargs={'nextpage': '/'}),
-
-    
+ 
 ]
+
+# # default: "Django Administration"
+# admin.site.site_header = 'Project Admin'
+# # default: "Site administration"
+# admin.site.index_title = 'Features area'
+# # default: "Django site admin"
+# admin.site.site_title = 'HTML title from adminsitration'

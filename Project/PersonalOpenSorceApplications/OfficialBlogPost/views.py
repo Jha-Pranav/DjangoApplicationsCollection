@@ -60,14 +60,16 @@ class PostDraftView(LoginRequiredMixin, ListView):
 
 @login_required
 def post_publish(request,pk):
-    post = get_list_or_404(Post, pk)
+    print('*'*10,pk)
+    post = get_list_or_404(Post, pk=pk)[0]
+    print('*'*100, post)
     post.publish()
     return redirect('post_detail', pk)
 
 
 @login_required
 def add_comment_to_post(request,pk):
-    post = get_list_or_404(Post, pk)
+    post = get_list_or_404(Post, pk=pk)[0]
     if request.method == 'Post':
         form = CommentForm(request.POST)
         if form.is_valid() :
@@ -77,17 +79,17 @@ def add_comment_to_post(request,pk):
             return redirect('post_datail', pk=post.pk)
     else:
         form= CommentForm()
-    return render(request, 'blog/comment_form.html',{'form': form})
+    return render(request, 'OfficialBlogPost/comment_form.html', {'form': form})
 
 @login_required
 def approve_comment(request,pk):
-    comment = get_list_or_404(Comment,pk)
+    comment = get_list_or_404(Comment,pk=pk)[0]
     comment.approve()
     return redirect('post_detail', comment.post.pk)
 
 
 def remove_comment(request,pk):
-     comment = get_list_or_404(Comment, pk)
+     comment = get_list_or_404(Comment, pk=pk)[0]
      comment_pk = comment.post.pk
      comment.delete()
      return redirect('post_detail', pk = comment_pk)
